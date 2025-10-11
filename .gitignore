@@ -1,0 +1,7 @@
+/K2ItemSpriteReplacer/obj/*.*
+/K2ItemSpriteReplacer/obj/Debug/netstandard2.1/*.*
+/K2ItemSpriteReplacer/obj/Debug/netstandard2.1/Debug
+/K2ItemSpriteReplacer/obj/Debug/netstandard2.1/TempPE
+/K2ItemSpriteReplacer/bin
+/.vs
+output.lnk
