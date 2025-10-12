@@ -24,7 +24,7 @@ Requirements for C# modding:
 K2-ItemSpriteReplacer replaces any item's sprites with custom ones
 
 <h3>Mod Installation Instructions</h3>
-Then Reboot the game.
+After installation Reboot the game.
 
 <h2>Special Thanks</h2>
 Thanks to BlauKitten for the support in making this SDK! ♥
