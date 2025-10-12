@@ -1,6 +1,6 @@
 ﻿<ArrayOfItemSpriteInfo>
 	<ItemSpriteInfo>
-		<Name>Example item name 1</Name>
+		<Name>Elven Leather</Name>
 		<IntactResourcePath>assets\visual\example.png</IntactResourcePath>
 		<DamagedResourcePath>assets\visual\example.png</DamagedResourcePath>
 		<RuinedResourcePath>assets\visual\example.png</RuinedResourcePath>
@@ -8,7 +8,7 @@
 		<PreviewSpritePath>assets\preview\example.png</PreviewSpritePath>
 	</ItemSpriteInfo>
 	<ItemSpriteInfo>
-		<Name>Example item name 2</Name>
+		<Name>Vibrosuit</Name>
 		<IntactResourcePath>assets\visual\example.png</IntactResourcePath>
 		<DamagedResourcePath>assets\visual\example.png</DamagedResourcePath>
 		<RuinedResourcePath>assets\visual\example.png</RuinedResourcePath>

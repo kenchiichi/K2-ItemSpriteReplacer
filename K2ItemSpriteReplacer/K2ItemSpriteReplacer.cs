@@ -40,6 +40,7 @@ namespace K2ItemSpriteReplacer
                             clone.DisplaySpriteResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.PreviewSpritePath));
                             clone.DurabilityDisplayLayers.ForEach(layer =>
                             {
+                                layer.DisplaySprite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.IntactResourcePath));
                                 layer.DurabilitySprites.IntactResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.IntactResourcePath));
                                 layer.DurabilitySprites.RuinedResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DamagedResourcePath));
                                 layer.DurabilitySprites.DamagedResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.RuinedResourcePath));
