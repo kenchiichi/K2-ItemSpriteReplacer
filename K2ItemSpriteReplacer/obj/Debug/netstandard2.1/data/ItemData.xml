@@ -1,18 +1,13 @@
 ﻿<ArrayOfItemSpriteInfo>
 	<ItemSpriteInfo>
-		<Name>Elven Leather</Name>
-		<IntactResourcePath>assets\visual\example.png</IntactResourcePath>
-		<DamagedResourcePath>assets\visual\example.png</DamagedResourcePath>
-		<RuinedResourcePath>assets\visual\example.png</RuinedResourcePath>
-		<DestroyedResourcePath>assets\visual\example.png</DestroyedResourcePath>
-		<PreviewSpritePath>assets\preview\example.png</PreviewSpritePath>
-	</ItemSpriteInfo>
-	<ItemSpriteInfo>
 		<Name>Vibrosuit</Name>
 		<IntactResourcePath>assets\visual\example.png</IntactResourcePath>
 		<DamagedResourcePath>assets\visual\example.png</DamagedResourcePath>
 		<RuinedResourcePath>assets\visual\example.png</RuinedResourcePath>
 		<DestroyedResourcePath>assets\visual\example.png</DestroyedResourcePath>
-		<PreviewSpritePath>assets\preview\example.png</PreviewSpritePath>
+	</ItemSpriteInfo>
+	<ItemSpriteInfo>
+		<Name>Cabal Shield Generator</Name>
+		<DestroyedResourcePath>assets\visual\example.png</DestroyedResourcePath>
 	</ItemSpriteInfo>
 </ArrayOfItemSpriteInfo>

@@ -1,5 +1,4 @@
-﻿using ANToolkit.Controllers;
-using Asuna.CharManagement;
+﻿using ANToolkit.ResourceManagement;
 using Asuna.Dialogues;
 using Asuna.Items;
 using Modding;
@@ -37,14 +36,69 @@ namespace K2ItemSpriteReplacer
                         if (oldItem.Name == item.Name)
                         {
                             Equipment clone = newItem as Equipment;
-                            clone.DisplaySpriteResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.PreviewSpritePath));
+                            if (item.PreviewSpritePath != null)
+                            {
+                                clone.DisplaySpriteResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.PreviewSpritePath));
+                            }
                             clone.DurabilityDisplayLayers.ForEach(layer =>
                             {
-                                layer.DisplaySprite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.IntactResourcePath));
-                                layer.DurabilitySprites.IntactResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.IntactResourcePath));
-                                layer.DurabilitySprites.RuinedResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DamagedResourcePath));
-                                layer.DurabilitySprites.DamagedResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.RuinedResourcePath));
-                                layer.DurabilitySprites.DestroyedResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DestroyedResourcePath));
+                                bool spriteOverWrite = false;
+                                ANResourceSprite spriteToOverWrite = null;
+
+                                if (item.IntactResourcePath != null && item.DamagedResourcePath != null && item.RuinedResourcePath != null && item.DestroyedResourcePath != null)
+                                {
+                                    if (item.IntactResourcePath != null)
+                                    {
+                                        layer.DurabilitySprites.IntactResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.IntactResourcePath));
+                                        spriteOverWrite = true;
+                                        spriteToOverWrite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.IntactResourcePath));
+                                    }
+                                    if (item.DamagedResourcePath != null)
+                                    {
+                                        layer.DurabilitySprites.DamagedResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DamagedResourcePath));
+                                        spriteOverWrite = true;
+                                        spriteToOverWrite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DamagedResourcePath));
+                                    }
+                                    if (item.RuinedResourcePath != null)
+                                    {
+                                        layer.DurabilitySprites.RuinedResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.RuinedResourcePath));
+                                        spriteOverWrite = true;
+                                        spriteToOverWrite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.RuinedResourcePath));
+                                    }
+                                    if (item.DestroyedResourcePath != null)
+                                    {
+                                        layer.DurabilitySprites.DestroyedResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DestroyedResourcePath));
+                                        spriteOverWrite = true;
+                                        spriteToOverWrite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DestroyedResourcePath));
+                                    }
+                                    if (spriteOverWrite)
+                                    {
+                                        layer.DisplaySprite = spriteToOverWrite;
+                                    }
+                                }
+                                else if (item.IntactResourcePath != null || item.DamagedResourcePath != null || item.RuinedResourcePath != null || item.DestroyedResourcePath != null)
+                                {
+                                    if (item.IntactResourcePath != null)
+                                    {
+                                        layer.DisplaySprite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.IntactResourcePath));
+                                        return;
+                                    }
+                                    if (item.DamagedResourcePath != null)
+                                    {
+                                        layer.DisplaySprite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DamagedResourcePath));
+                                        return;
+                                    }
+                                    if (item.RuinedResourcePath != null)
+                                    {
+                                        layer.DisplaySprite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.RuinedResourcePath));
+                                        return;
+                                    }
+                                    if (item.DestroyedResourcePath != null)
+                                    {
+                                        layer.DisplaySprite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DestroyedResourcePath));
+                                        return;
+                                    }
+                                }
                             });
                         }
                     }
