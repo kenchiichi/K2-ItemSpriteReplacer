@@ -1,6 +1,9 @@
-﻿using ANToolkit.ResourceManagement;
+﻿using ANToolkit.Controllers;
+using ANToolkit.ResourceManagement;
+using Asuna.CharManagement;
 using Asuna.Dialogues;
 using Asuna.Items;
+using HutongGames.PlayMaker;
 using Modding;
 using System.Collections.Generic;
 using System.IO;
@@ -21,8 +24,65 @@ namespace K2ItemSpriteReplacer
 
         public void OnModLoaded(ModManifest manifest)
         {
+            string temp = "Item list: \n";
+            foreach (var item in Apparel.All)
+            {
+                if (item.Value is Apparel)
+                {
+                    if (item.Value.Name == "Vibrosuit")
+                    {
+                        Apparel apparel = (Apparel)item.Value;
+                        temp += apparel.Name + "\n";
+                        foreach (var durabilityDisplayLayers in apparel.DurabilityDisplayLayers)
+                        {
+                            temp += "----------------------------------------------------------------------------------------------------\n";
+                            temp += "Name                  :" + durabilityDisplayLayers.Name + "\n";
+                            temp += "AllowRecolor          :" + durabilityDisplayLayers.AllowRecolor + "\n";
+                            temp += "Character             :" + durabilityDisplayLayers.Character + "\n";
+                            temp += "DefaultColor          :" + durabilityDisplayLayers.DefaultColor + "\n";
+                            temp += "DisableRestraint      :" + durabilityDisplayLayers.DisableRestraint + "\n";
+                            temp += "DurabilitySprites     :" + durabilityDisplayLayers.DurabilitySprites + "\n";
+                            temp += "Equipment             :" + durabilityDisplayLayers.Equipment + "\n";
+                            temp += "InheritColorFromLayer :" + durabilityDisplayLayers.InheritColorFromLayer + "\n";
+                            temp += "Initialized           :" + durabilityDisplayLayers.Initialized + "\n";
+                            temp += "OnColorChanged        :" + durabilityDisplayLayers.OnColorChanged + "\n";
+                            temp += "OnEnableChanged       :" + durabilityDisplayLayers.OnEnableChanged + "\n";
+                            temp += "OnSpriteChanged       :" + durabilityDisplayLayers.OnSpriteChanged + "\n";
+                            temp += "RequiresOpenTop       :" + durabilityDisplayLayers.RequiresOpenTop + "\n";
+                            temp += "SortingLayer          :" + durabilityDisplayLayers.SortingLayer + "\n";
+                            temp += "SortingOrder          :" + durabilityDisplayLayers.SortingOrder + "\n";
+                            temp += "SpriteResource        :" + durabilityDisplayLayers.SpriteResource + "\n";
+                            temp += "UseDurability         :" + durabilityDisplayLayers.UseDurability + "\n";
+                            temp += "----------------------------------------------------------------------------------------------------\n";
+                            temp += "\n";
+                        }
+                        foreach (var i2 in apparel.GetCustomFunctions())
+                        {
+                            temp += i2.ID + "\n";
+                            
+                        }
+                        temp += "\n";
+                    }
+                }
+            }
+            Debug.Log(temp);
+            File.WriteAllText(Path.Combine(manifest.ModPath, "data\\vibrosuit.txt"), temp);
             Debug.Log("K2-ItemSpriteReplacer Installed");
-
+            CorrectSprite(manifest);
+        }
+        public void OnModUnLoaded()
+        {
+            Debug.Log("K2-ItemSpriteReplacer Uninstalled");
+        }
+        private static T Deserialize<T>(string xmlString)
+        {
+            if (xmlString == null) return default;
+            var serializer = new XmlSerializer(typeof(T));
+            using var reader = new StringReader(xmlString);
+            return (T)serializer.Deserialize(reader);
+        }
+        public void CorrectSprite(ModManifest manifest) 
+        {
             using StreamReader k2StreamReader = new StreamReader(Path.Combine(manifest.ModPath, "data\\ItemData.xml"));
 
             List<ItemSpriteInfo> k2Sprites = Deserialize<List<ItemSpriteInfo>>(k2StreamReader.ReadToEnd());
@@ -36,91 +96,46 @@ namespace K2ItemSpriteReplacer
                         if (oldItem.Name == item.Name)
                         {
                             Equipment clone = newItem as Equipment;
+
+                            ItemCustomFunction itemCustomFunction = new ItemCustomFunction
+                            {
+                                Hidden = false,
+                                ID = "open_top2",
+                                DisplayName = "Little Nakey Button",
+                                RequiredStatAmount = 0,
+                                RequiredStatID = "stat_crit_chance"
+                            };
+
+                            clone.AddCustomFunction(itemCustomFunction);
+
+                            //clone.UseCustomFunction(Character.Get("Jenna"), "little_nakey_button", true);
+
+                            var layer = clone.DurabilityDisplayLayers[0];
+                            if (item.DisplaySprite != null)
+                            {
+                                layer.DisplaySprite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DisplaySprite));
+                            }
                             if (item.PreviewSpritePath != null)
                             {
                                 clone.DisplaySpriteResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.PreviewSpritePath));
                             }
-                            clone.DurabilityDisplayLayers.ForEach(layer =>
+                            if (item.IntactResourcePath != null && item.DamagedResourcePath != null && item.RuinedResourcePath != null && item.DestroyedResourcePath != null)
                             {
-                                bool spriteOverWrite = false;
-                                ANResourceSprite spriteToOverWrite = null;
-
-                                if (item.IntactResourcePath != null && item.DamagedResourcePath != null && item.RuinedResourcePath != null && item.DestroyedResourcePath != null)
-                                {
-                                    if (item.IntactResourcePath != null)
-                                    {
-                                        layer.DurabilitySprites.IntactResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.IntactResourcePath));
-                                        spriteOverWrite = true;
-                                        spriteToOverWrite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.IntactResourcePath));
-                                    }
-                                    if (item.DamagedResourcePath != null)
-                                    {
-                                        layer.DurabilitySprites.DamagedResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DamagedResourcePath));
-                                        spriteOverWrite = true;
-                                        spriteToOverWrite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DamagedResourcePath));
-                                    }
-                                    if (item.RuinedResourcePath != null)
-                                    {
-                                        layer.DurabilitySprites.RuinedResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.RuinedResourcePath));
-                                        spriteOverWrite = true;
-                                        spriteToOverWrite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.RuinedResourcePath));
-                                    }
-                                    if (item.DestroyedResourcePath != null)
-                                    {
-                                        layer.DurabilitySprites.DestroyedResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DestroyedResourcePath));
-                                        spriteOverWrite = true;
-                                        spriteToOverWrite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DestroyedResourcePath));
-                                    }
-                                    if (spriteOverWrite)
-                                    {
-                                        layer.DisplaySprite = spriteToOverWrite;
-                                    }
-                                }
-                                else if (item.IntactResourcePath != null || item.DamagedResourcePath != null || item.RuinedResourcePath != null || item.DestroyedResourcePath != null)
-                                {
-                                    if (item.IntactResourcePath != null)
-                                    {
-                                        layer.DisplaySprite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.IntactResourcePath));
-                                        return;
-                                    }
-                                    if (item.DamagedResourcePath != null)
-                                    {
-                                        layer.DisplaySprite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DamagedResourcePath));
-                                        return;
-                                    }
-                                    if (item.RuinedResourcePath != null)
-                                    {
-                                        layer.DisplaySprite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.RuinedResourcePath));
-                                        return;
-                                    }
-                                    if (item.DestroyedResourcePath != null)
-                                    {
-                                        layer.DisplaySprite = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DestroyedResourcePath));
-                                        return;
-                                    }
-                                }
-                            });
+                                layer.DurabilitySprites.IntactResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.IntactResourcePath));
+                                layer.DurabilitySprites.DamagedResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DamagedResourcePath));
+                                layer.DurabilitySprites.RuinedResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.RuinedResourcePath));
+                                layer.DurabilitySprites.DestroyedResource = manifest.SpriteResolver.ResolveAsResource(Path.Combine(manifest.ModPath, item.DestroyedResourcePath));
+                            }
                         }
                     }
                 }
             });
         }
-
-        public void OnModUnLoaded()
-        {
-            Debug.Log("K2-ItemSpriteReplacer Uninstalled");
-        }
-        private static T Deserialize<T>(string xmlString)
-        {
-            if (xmlString == null) return default;
-            var serializer = new XmlSerializer(typeof(T));
-            using var reader = new StringReader(xmlString);
-            return (T)serializer.Deserialize(reader);
-        }
     }
     public class ItemSpriteInfo
     {
         public string Name { get; set; }
+        public string DisplaySprite { get; set; }
         public string PreviewSpritePath { get; set; }
         public string IntactResourcePath { get; set; }
         public string DamagedResourcePath { get; set; }

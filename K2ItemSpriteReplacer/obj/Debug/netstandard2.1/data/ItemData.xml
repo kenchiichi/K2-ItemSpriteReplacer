@@ -1,6 +1,7 @@
 ﻿<ArrayOfItemSpriteInfo>
 	<ItemSpriteInfo>
-		<Name>Vibrosuit</Name>
+		<Name>Vibrosuit_Vibrodash_Debug</Name>
+		<DisplaySprite>assets\visual\example.png</DisplaySprite>
 		<IntactResourcePath>assets\visual\example.png</IntactResourcePath>
 		<DamagedResourcePath>assets\visual\example.png</DamagedResourcePath>
 		<RuinedResourcePath>assets\visual\example.png</RuinedResourcePath>
@@ -8,6 +9,6 @@
 	</ItemSpriteInfo>
 	<ItemSpriteInfo>
 		<Name>Cabal Shield Generator</Name>
-		<DestroyedResourcePath>assets\visual\example.png</DestroyedResourcePath>
+		<DisplaySprite>assets\visual\example.png</DisplaySprite>
 	</ItemSpriteInfo>
 </ArrayOfItemSpriteInfo>

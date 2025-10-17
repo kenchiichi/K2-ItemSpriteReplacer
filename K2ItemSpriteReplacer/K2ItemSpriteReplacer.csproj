@@ -9,6 +9,15 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>D:\Non-Steam-Games\Third Crisis\Third Crisis_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
+    <Reference Include="PlayMaker">
+      <HintPath>D:\Non-Steam-Games\Third Crisis\Third Crisis_Data\Managed\PlayMaker.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Animation.Runtime">
+      <HintPath>D:\Non-Steam-Games\Third Crisis\Third Crisis_Data\Managed\Unity.2D.Animation.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>D:\Non-Steam-Games\Third Crisis\Third Crisis_Data\Managed\UnityEngine.AnimationModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>D:\Non-Steam-Games\Third Crisis\Third Crisis_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>

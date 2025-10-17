@@ -1,0 +1,107 @@
+Item list: 
+Vibrosuit
+----------------------------------------------------------------------------------------------------
+Name                  :Vibrosuit
+AllowRecolor          :False
+Character             :
+DefaultColor          :RGBA(1.000, 1.000, 1.000, 1.000)
+DisableRestraint      :Restraint: Empty
+DurabilitySprites     :Asuna.CharManagement.DurabilitySpriteInfo
+Equipment             :
+InheritColorFromLayer :
+Initialized           :False
+OnColorChanged        :Asuna.CharManagement.VisualLayerEvent Asuna.CharManagement.VisualLayerEvent
+OnEnableChanged       :Asuna.CharManagement.VisualLayerEvent Asuna.CharManagement.VisualLayerEvent
+OnSpriteChanged       :Asuna.CharManagement.VisualLayerEvent Asuna.CharManagement.VisualLayerEvent
+RequiresOpenTop       :False
+SortingLayer          :Outfit
+SortingOrder          :0
+SpriteResource        :(ANResourceSprite[False]: )
+UseDurability         :True
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Name                  :Vibrosuit_TopOpen
+AllowRecolor          :False
+Character             :
+DefaultColor          :RGBA(1.000, 1.000, 1.000, 1.000)
+DisableRestraint      :Restraint: Empty
+DurabilitySprites     :Asuna.CharManagement.DurabilitySpriteInfo
+Equipment             :
+InheritColorFromLayer :
+Initialized           :False
+OnColorChanged        :Asuna.CharManagement.VisualLayerEvent Asuna.CharManagement.VisualLayerEvent
+OnEnableChanged       :Asuna.CharManagement.VisualLayerEvent Asuna.CharManagement.VisualLayerEvent
+OnSpriteChanged       :Asuna.CharManagement.VisualLayerEvent Asuna.CharManagement.VisualLayerEvent
+RequiresOpenTop       :False
+SortingLayer          :Outfit
+SortingOrder          :1
+SpriteResource        :(ANResourceSprite[False]: )
+UseDurability         :True
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Name                  :Vibrosuit_TopOpen_Nipples
+AllowRecolor          :False
+Character             :
+DefaultColor          :RGBA(1.000, 1.000, 1.000, 1.000)
+DisableRestraint      :Restraint: Empty
+DurabilitySprites     :Asuna.CharManagement.DurabilitySpriteInfo
+Equipment             :
+InheritColorFromLayer :
+Initialized           :False
+OnColorChanged        :Asuna.CharManagement.VisualLayerEvent Asuna.CharManagement.VisualLayerEvent
+OnEnableChanged       :Asuna.CharManagement.VisualLayerEvent Asuna.CharManagement.VisualLayerEvent
+OnSpriteChanged       :Asuna.CharManagement.VisualLayerEvent Asuna.CharManagement.VisualLayerEvent
+RequiresOpenTop       :False
+SortingLayer          :Accessories
+SortingOrder          :1
+SpriteResource        :(ANResourceSprite[False]: )
+UseDurability         :True
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Name                  :Vibrosuit_Wet
+AllowRecolor          :False
+Character             :
+DefaultColor          :RGBA(1.000, 1.000, 1.000, 1.000)
+DisableRestraint      :Restraint: Empty
+DurabilitySprites     :Asuna.CharManagement.DurabilitySpriteInfo
+Equipment             :
+InheritColorFromLayer :
+Initialized           :False
+OnColorChanged        :Asuna.CharManagement.VisualLayerEvent Asuna.CharManagement.VisualLayerEvent
+OnEnableChanged       :Asuna.CharManagement.VisualLayerEvent Asuna.CharManagement.VisualLayerEvent
+OnSpriteChanged       :Asuna.CharManagement.VisualLayerEvent Asuna.CharManagement.VisualLayerEvent
+RequiresOpenTop       :False
+SortingLayer          :Outfit
+SortingOrder          :0
+SpriteResource        :(ANResourceSprite[False]: )
+UseDurability         :True
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Name                  :Vibrosuit_TornCrotch
+AllowRecolor          :False
+Character             :
+DefaultColor          :RGBA(1.000, 1.000, 1.000, 1.000)
+DisableRestraint      :Restraint: Empty
+DurabilitySprites     :Asuna.CharManagement.DurabilitySpriteInfo
+Equipment             :
+InheritColorFromLayer :
+Initialized           :False
+OnColorChanged        :Asuna.CharManagement.VisualLayerEvent Asuna.CharManagement.VisualLayerEvent
+OnEnableChanged       :Asuna.CharManagement.VisualLayerEvent Asuna.CharManagement.VisualLayerEvent
+OnSpriteChanged       :Asuna.CharManagement.VisualLayerEvent Asuna.CharManagement.VisualLayerEvent
+RequiresOpenTop       :False
+SortingLayer          :Outfit
+SortingOrder          :0
+SpriteResource        :(ANResourceSprite[False]: )
+UseDurability         :True
+----------------------------------------------------------------------------------------------------
+
+make_wet
+make_dry
+tear_crotch
+open_top
+
